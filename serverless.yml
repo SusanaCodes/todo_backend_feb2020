@@ -12,6 +12,10 @@ provider:
 functions:
   tasks:
     handler: handler.app #handler -name of file, app=named export
+    enviroment:
+      DB_HOST: ${opt:DB_HOST}
+      DB_USER: ${opt:DB_USER}
+      DB_PASSWORD: ${opt:DB_PASSWORD}
     events:
       - http:
           path: /tasks
