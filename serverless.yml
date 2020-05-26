@@ -1,5 +1,3 @@
-
-
 service: todo-backend-feb2020
 
 provider:
@@ -7,12 +5,10 @@ provider:
   runtime: nodejs12.x
   region: eu-west-1
 
-
-
 functions:
   tasks:
     handler: handler.app #handler -name of file, app=named export
-    enviroment:
+    environment:
       DB_HOST: ${opt:DB_HOST}
       DB_USER: ${opt:DB_USER}
       DB_PASSWORD: ${opt:DB_PASSWORD}
