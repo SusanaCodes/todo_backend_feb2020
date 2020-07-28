@@ -20,12 +20,12 @@ functions:
       - http:
           path: /tasks/{id} #id is a path Parameter
           method: PUT
-          cors: true # Cross Origen Resource Sharing
+          cors: true
       - http:
           path: /tasks
           method: POST
-          cors: true # Cross Origen Resource Sharing
+          cors: true
       - http:
           path: /tasks/{id}
           method: DELETE
-          cors: true # Cross Origen Resource Sharing
+          cors: true

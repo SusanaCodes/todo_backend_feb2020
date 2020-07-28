@@ -1,7 +1,3 @@
-//import express from "express" is only for React, as they use the most modern JS
-//React apps get Transpiled
-//This version of NodeJS does support statements and there is no transpilation step
-
 const serverlessHttp = require("serverless-http");
 const express = require("express");
 const cors = require("cors");
@@ -12,12 +8,8 @@ const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: "Task",
+  database: "Tasks",
 });
-
-//Logically separate 4 sections of code according to the method of HTTP request received.
-
-// Export a single function, called app
 
 const app = express();
 app.use(cors());
@@ -37,23 +29,16 @@ app.get("/tasks", function (request, response) {
 
 app.delete("/tasks/:id", function (request, response) {
   const id = request.params.id;
-  const query = `DELETE FROM Task WHERE TaskId = ?`;
+  const query = "DELETE FROM Tasks WHERE TaskId = ?";
   connection.query(query, [id], (err) => {
     if (err) {
       console.log("Error from MySQL", err);
       response.status(500).send(err);
     } else {
-      response.status(200).send(`Task successfully deleted!`);
+      response.status(200).send("Task successfully deleted!");
     }
   });
 });
-
-/*THIS IS THE REQUEST BODY
-{
-	"text": "Wash the dog",
-	"dataDue": "2020-04-24",
-	"urgent": true
-} */
 
 app.post("/tasks", function (request, response) {
   const data = request.body;
@@ -87,7 +72,7 @@ app.put("/tasks/:id", function (request, response) {
   const id = request.params.id;
   const data = request.body;
   const query = "UPDATE Task SET? WHERE TaskId=?";
-  connection.query(query, [data.Completed, id], (err) => {
+  connection.query(query, [data, id], (err) => {
     if (err) {
       console.log("Error from MySQL", err);
       response.status(500).send(err);
